@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        li {
+            width: 100%;
+            margin: 10px;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .book-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .book-actions {
+            margin-top: 10px;
+        }
+
+        .book-actions button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book List</h1>
+    <form id="bookForm">
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="text" id="genre" placeholder="Genre" required>
+        <input type="text" id="description" placeholder="Description" required>
+        <input type="text" id="isbn" placeholder="ISBN" required>
+        <input type="text" id="image" placeholder="Image URL" required>
+        <input type="text" id="published" placeholder="Published Date" required>
+        <input type="text" id="publisher" placeholder="Publisher" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <button id="resetButton">Reset to Original List</button>
+
+    <ul id="bookList">
+        {{ range . }}
+        <li class="book-item" data-id="{{ .ID }}">
+            <h3>{{ .Title }}</h3>
+            <p>Author: {{ .Author }}</p>
+            <p>Genre: {{ .Genre }}</p>
+            <p>{{ .Description }}</p>
+            <p>ISBN: {{ .ISBN }}</p>
+            <img src="{{ .Image }}" alt="{{ .Title }}">
+            <p>Published: {{ .Published }}</p>
+            <p>Publisher: {{ .Publisher }}</p>
+            <div class="book-actions">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </li>
+        {{ end }}
+    </ul>
+    <script src="/static/script.js"></script>
+</body>
+</html>
